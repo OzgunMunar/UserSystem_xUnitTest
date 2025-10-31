@@ -1,0 +1,6 @@
+@UserSystem_xUnitTest.Api_HostAddress = http://localhost:5075
+
+GET {{UserSystem_xUnitTest.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
