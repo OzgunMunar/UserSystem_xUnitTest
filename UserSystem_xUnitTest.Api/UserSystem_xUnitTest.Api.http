@@ -1,6 +1,24 @@
 @UserSystem_xUnitTest.Api_HostAddress = http://localhost:5075
 
-GET {{UserSystem_xUnitTest.Api_HostAddress}}/weatherforecast/
+GET {{UserSystem_xUnitTest.Api_HostAddress}}/api/Users/GetAll
+Accept: application/json
+
+###
+
+GET {{UserSystem_xUnitTest.Api_HostAddress}}/api/Users/GetById/1ee16d32-88d7-4a12-bf21-2eea4492e8fc
+Accept: application/json
+
+###
+
+POST {{UserSystem_xUnitTest.Api_HostAddress}}/api/Users/Create
+Accept: application/json 
+Content-Type: application/json
+{
+  "fullName": "Özgün Munar"
+}
+###
+
+GET {{UserSystem_xUnitTest.Api_HostAddress}}/api/Users/Delete/1ee16d32-88d7-4a12-bf21-2eea4492e8fc
 Accept: application/json
 
 ###
