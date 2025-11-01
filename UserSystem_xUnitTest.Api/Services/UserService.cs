@@ -24,6 +24,12 @@ namespace UserSystem_xUnitTest.Api.Services
                 throw new ValidationException(string.Join(", ", result.Errors.Select(s => s.ErrorMessage)));
             }
 
+            var nameIsExist = await userRepository.NameIsExist(request.FullName, cancellationToken);
+            if (nameIsExist)
+            {
+                throw new ArgumentException("Name already exist");
+            }
+
             User user = new()
             {
                 Id = Guid.NewGuid(),
@@ -40,7 +46,7 @@ namespace UserSystem_xUnitTest.Api.Services
             }
             catch (Exception ex) 
             {
-                logger.LogError(ex, "Something went wrong while createing user.");
+                logger.LogError(ex, "Something went wrong while creating user.");
                 throw;
             }
             finally
@@ -116,5 +122,17 @@ namespace UserSystem_xUnitTest.Api.Services
                 logger.LogInformation("User with id: {0} retrieved in {1}ms", Id, stopWatch.ElapsedMilliseconds);
             }
         }
+
+        public User CreateUserDtoToUserObject(CreateUserDto request)
+        {
+            User user = new()
+            {
+                Id = Guid.NewGuid(),
+                FullName = request.FullName
+            };
+
+            return user;
+        }
+
     }
 }

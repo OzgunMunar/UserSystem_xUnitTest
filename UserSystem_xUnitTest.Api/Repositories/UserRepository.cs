@@ -30,6 +30,11 @@ namespace UserSystem_xUnitTest.Api.Repositories
         {
             return await context.Users.FirstOrDefaultAsync(cancellationToken);
         }
+
+        public async Task<bool> NameIsExist(string fullName, CancellationToken cancellationToken = default)
+        {
+            return await context.Users.AnyAsync(p => p.FullName == fullName, cancellationToken);
+        }
     }
 
 }
