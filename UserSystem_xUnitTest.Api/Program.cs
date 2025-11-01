@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using UserSystem_xUnitTest.Api.Context;
+using UserSystem_xUnitTest.Api.Logging;
 using UserSystem_xUnitTest.Api.Repositories;
 using UserSystem_xUnitTest.Api.Services;
 
@@ -13,6 +14,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddTransient(typeof(ILoggerAdapter<>), typeof(LoggerAdapter<>));
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using System.Diagnostics;
 using UserSystem_xUnitTest.Api.DTOs;
+using UserSystem_xUnitTest.Api.Logging;
 using UserSystem_xUnitTest.Api.Models;
 using UserSystem_xUnitTest.Api.Repositories;
 using UserSystem_xUnitTest.Api.Validators;
@@ -9,7 +10,7 @@ namespace UserSystem_xUnitTest.Api.Services
 {
     public sealed class UserService(
         IUserRepository userRepository,
-        ILogger<User> logger
+        ILoggerAdapter<UserService> logger
         ) : IUserService
     {
         public async Task<bool> CreateAsync(CreateUserDto request, CancellationToken cancellationToken = default)
@@ -92,7 +93,7 @@ namespace UserSystem_xUnitTest.Api.Services
             finally
             {
                 stopWatch.Stop();
-                logger.LogInformation("All users retrieved in {0}ms", stopWatch.ElapsedMilliseconds);
+                logger.LogInformation("All users retrieved in {0}ms.", stopWatch.ElapsedMilliseconds);
             }
         }
 
